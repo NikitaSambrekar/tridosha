@@ -1,8 +1,34 @@
 import streamlit as st
-from PIL import Image
 
 
-
+# Function to provide diet plans based on dosha type, age, and weight
+def get_diet_plan(dosha, age):
+    diet_plans = {
+        "Vata": {
+            "child": "Warm, nourishing foods like soups and stews, root vegetables, and whole grains.",
+            "adult": "Cooked vegetables, warming spices, dairy, and well-cooked grains.",
+            "elderly": "Warm, soft foods with moderate oil, easily digestible grains, and cooked fruits."
+        },
+        "Pitta": {
+            "child": "Cooling foods like cucumber, melon, and dairy products. Avoid spicy foods.",
+            "adult": "Fresh fruits and vegetables, especially bitter greens, and cooling herbs.",
+            "elderly": "Cool, light foods, avoiding too much salt and spices. Fresh juices and salads."
+        },
+        "Kapha": {
+            "child": "Light, warm foods like steamed vegetables and lean proteins. Avoid dairy and heavy foods.",
+            "adult": "Spicy, light, and dry foods. Include lots of vegetables and legumes.",
+            "elderly": "Warm, light foods with spices like ginger and black pepper. Avoid heavy and oily foods."
+        }
+    }
+    
+    if age < 18:
+        age_group = "child"
+    elif 18 <= age <= 60:
+        age_group = "adult"
+    else:
+        age_group = "elderly"
+        
+    return diet_plans[dosha][age_group]
 
 # Function to style the app
 
@@ -66,13 +92,19 @@ if st.button("Submit"):
         st.write("No additional details provided.")
     
     # Display diet plan
-    
+    diet_plan = get_diet_plan(dosha, age)
     st.write("### Recommended Diet Plan:")
-   
+    st.write(diet_plan)
 
     # Provide additional tips and suggestions
     st.write("#### Additional Tips:")
-    
+    if dosha == "Vata":
+        st.write("Stay warm and hydrated. Incorporate regular meals and avoid cold and raw foods.")
+    elif dosha == "Pitta":
+        st.write("Stay cool and avoid overly spicy and oily foods. Incorporate cooling herbs and fresh fruits.")
+    elif dosha == "Kapha":
+        st.write("Stay active and incorporate spices into your diet. Avoid heavy and oily foods.")
+
 # Footer
-st.write("Thank you for providing your information. Based on the provided details, please follow the recommended diet plan for better health.")
+    st.write("Thank you for providing your information. Based on the provided details, please follow the recommended diet plan for better health.")
 
