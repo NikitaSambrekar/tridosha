@@ -1,30 +1,12 @@
 import streamlit as st
 from PIL import Image
-import base64
+
 
 
 
 # Function to style the app
 
-def add_bg_from_local(image_file):
-    with open(image_file, "rb") as image:
-        encoded_image = base64.b64encode(image.read()).decode()
-        st.markdown(
-        f"""
-        <style>
-        .stApp {{
-            background-image: url(data:image/png;base64,{encoded_image});
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }}
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
 
-# Adding background
-add_bg_from_local('image.png')
 
 # Title of the app
 st.title("🌿 Tridosha Imbalance Assessment and Diet Plan 🌿")
